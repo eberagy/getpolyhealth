@@ -2,12 +2,31 @@
 
 import { useState, useEffect } from "react";
 
+function Logo({ size = 28 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#2DD4BF" />
+          <stop offset="100%" stopColor="#6366F1" />
+        </linearGradient>
+      </defs>
+      <rect width="32" height="32" rx="8" fill="url(#logoGrad)" />
+      {/* Stylised P — bold left bar + rounded top arm */}
+      <rect x="9" y="8" width="4" height="16" rx="2" fill="white" />
+      <path d="M13 8h4a5 5 0 010 10h-4V8z" fill="white" />
+    </svg>
+  );
+}
+
+export { Logo };
+
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -16,17 +35,15 @@ export default function Nav() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#020C18]/90 backdrop-blur-md border-b border-white/5"
+          ? "bg-[#0C1220]/85 backdrop-blur-xl border-b border-white/[0.06]"
           : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2 group">
-          <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
-            <span className="text-[#020C18] font-black text-sm">P</span>
-          </div>
-          <span className="font-bold text-white text-lg tracking-tight">
+        <a href="#" className="flex items-center gap-2.5 group">
+          <Logo size={28} />
+          <span className="font-bold text-white text-[1.1rem] tracking-tight">
             Poly<span className="text-primary">Health</span>
           </span>
         </a>
@@ -42,7 +59,7 @@ export default function Nav() {
             <a
               key={item.label}
               href={item.href}
-              className="text-sm text-muted hover:text-white transition-colors duration-200"
+              className="text-sm text-slate-muted hover:text-white transition-colors duration-200 font-medium"
             >
               {item.label}
             </a>
@@ -50,20 +67,16 @@ export default function Nav() {
         </nav>
 
         {/* CTA */}
-        <div className="hidden md:flex items-center gap-4">
-          <a
-            href="#demo"
-            className="text-sm px-5 py-2 rounded-lg bg-primary text-[#020C18] font-semibold hover:bg-primary-dim transition-colors duration-200"
-          >
+        <div className="hidden md:flex">
+          <a href="#demo" className="btn-primary text-sm px-5 py-2.5 text-white">
             Book a Demo
           </a>
         </div>
 
-        {/* Mobile menu toggle */}
+        {/* Mobile toggle */}
         <button
-          className="md:hidden text-muted hover:text-white transition-colors"
+          className="md:hidden text-slate-muted hover:text-white transition-colors"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
         >
           {menuOpen ? (
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -79,7 +92,7 @@ export default function Nav() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-[#020C18]/95 backdrop-blur-md border-b border-white/5 px-6 pb-6 pt-2">
+        <div className="md:hidden bg-[#0C1220]/95 backdrop-blur-xl border-b border-white/[0.06] px-6 pb-6 pt-2">
           <nav className="flex flex-col gap-4">
             {[
               { label: "Agents", href: "#agents" },
@@ -91,7 +104,7 @@ export default function Nav() {
                 key={item.label}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                className="text-sm text-muted hover:text-white transition-colors"
+                className="text-sm text-slate-muted hover:text-white transition-colors font-medium"
               >
                 {item.label}
               </a>
@@ -99,7 +112,7 @@ export default function Nav() {
             <a
               href="#demo"
               onClick={() => setMenuOpen(false)}
-              className="text-sm px-5 py-2.5 rounded-lg bg-primary text-[#020C18] font-semibold text-center"
+              className="btn-primary text-sm text-center text-white"
             >
               Book a Demo
             </a>

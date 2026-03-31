@@ -1,68 +1,81 @@
 const testimonials = [
   {
     quote:
-      "The SOAP notes are as accurate as my best medical assistant — honestly more consistent. I sign off in under a minute now. This alone is worth the subscription.",
+      "The SOAP notes are indistinguishable from what my best MA produces — honestly more consistent. I sign off in under a minute. This single feature paid for six months of subscription.",
     name: "Dr. M. Okafor",
     title: "Internal Medicine · Philadelphia, PA",
     initials: "MO",
+    color: "rgba(45,212,191,0.15)",
+    border: "rgba(45,212,191,0.2)",
+    text: "#2DD4BF",
   },
   {
     quote:
-      "I launched my telehealth practice in less than a week. The intake and discharge agents handle everything I used to need three staff members for. At $299 a week, it paid for itself after my second patient.",
+      "I launched my telehealth practice in under a week. Iris handled intake, Dex handled discharge — I never touched a form. At $299 a week, it paid for itself after two visits.",
     name: "Dr. S. Patel",
     title: "Family Medicine · Pittsburgh, PA",
     initials: "SP",
+    color: "rgba(99,102,241,0.15)",
+    border: "rgba(99,102,241,0.2)",
+    text: "#818CF8",
   },
   {
     quote:
-      "My patients love getting a call before their appointment to go through their symptoms. By the time we connect, I already know why they're there. Iris alone changed how I practice.",
+      "My patients love the pre-visit call from Iris. By the time we connect I know exactly why they're there, what meds they're on, and what's changed since last time. It's a different practice.",
     name: "Dr. A. Reyes",
     title: "Urgent Care · Allentown, PA",
     initials: "AR",
+    color: "rgba(251,191,36,0.12)",
+    border: "rgba(251,191,36,0.2)",
+    text: "#FBB024",
   },
 ];
 
 export default function Testimonials() {
   return (
-    <section className="py-28 px-6 section-divider">
+    <section className="section-base">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="text-primary text-sm font-semibold uppercase tracking-widest mb-4">
-            Early Physicians
-          </p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4">
-            Built for how you actually practice.
+          <p className="section-label">Early Physicians</p>
+          <h2 className="section-heading">
+            Built for how you{" "}
+            <span className="gradient-text">actually practice.</span>
           </h2>
-          <p className="text-muted text-lg max-w-xl mx-auto">
-            From our waitlist — physicians who&apos;ve seen PolyHealth in action.
-          </p>
         </div>
 
-        {/* Testimonial grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {testimonials.map((t) => (
             <div
               key={t.name}
-              className="bg-card rounded-2xl p-8 border border-white/5 flex flex-col gap-6"
+              className="glass-card rounded-2xl p-8 flex flex-col gap-5"
+              style={{ borderColor: t.border }}
             >
-              {/* Quote marks */}
-              <div className="text-primary/30 text-5xl font-serif leading-none select-none">
-                &ldquo;
-              </div>
+              {/* Large quote mark */}
+              <svg width="32" height="24" viewBox="0 0 32 24" fill="none">
+                <path
+                  d="M0 24V14.4C0 6.08 4.48 1.28 13.44 0l1.92 3.2C10.88 4.16 8.64 6.4 8 10.4H14V24H0ZM18 24V14.4C18 6.08 22.48 1.28 31.44 0L33.36 3.2C28.88 4.16 26.64 6.4 26 10.4H32V24H18Z"
+                  fill={t.text}
+                  fillOpacity={0.25}
+                />
+              </svg>
 
-              <p className="text-[#C8DDF0] text-sm leading-relaxed -mt-4">
+              <p className="text-[#C8D8E8] text-sm leading-relaxed flex-1">
                 {t.quote}
               </p>
 
               {/* Author */}
-              <div className="flex items-center gap-3 mt-auto pt-4 border-t border-white/5">
-                <div className="w-9 h-9 rounded-full bg-primary/15 flex items-center justify-center text-primary text-xs font-bold shrink-0">
+              <div className="flex items-center gap-3 pt-4 border-t border-white/[0.06]">
+                <div
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
+                  style={{ background: t.color, color: t.text }}
+                >
                   {t.initials}
                 </div>
                 <div>
                   <p className="text-white text-sm font-semibold">{t.name}</p>
-                  <p className="text-muted text-xs">{t.title}</p>
+                  <p className="text-slate-muted text-xs">{t.title}</p>
                 </div>
               </div>
             </div>

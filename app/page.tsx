@@ -7,50 +7,67 @@ import Team from "@/components/team";
 import DemoCTA from "@/components/demo-cta";
 import Footer from "@/components/footer";
 
-/* ─── Pain Points ────────────────────────────────────────────────────── */
+/* ─── Pain Points ─────────────────────────────────────────────────────── */
 function Problem() {
   const pains = [
     {
       icon: "📞",
+      label: "Admin Overload",
       heading: "Your staff spends more time on the phone than your patients do.",
-      body: "Appointment reminders, intake calls, lab notifications, pharmacy callbacks — the admin never stops. You hired clinicians. You're running a call center.",
+      body: "Appointment reminders, intake calls, lab notifications, pharmacy callbacks — it never stops. You hired clinicians. You&apos;re running a call center.",
+      accent: "rgba(99,102,241,0.1)",
+      border: "rgba(99,102,241,0.15)",
     },
     {
       icon: "📄",
+      label: "Documentation Burden",
       heading: "SOAP notes are eating your evenings.",
-      body: "Charting after every visit adds hours to every day. The documentation burden is a leading cause of physician burnout — and it doesn't have to be.",
+      body: "Charting after every visit adds hours to every day. The documentation burden is a leading cause of physician burnout — and it doesn&apos;t have to be.",
+      accent: "rgba(45,212,191,0.08)",
+      border: "rgba(45,212,191,0.15)",
     },
     {
       icon: "💸",
-      heading: "Staffing a full front office is expensive and fragile.",
-      body: "A medical assistant costs $40,000–$60,000 a year. They get sick, they quit, they make mistakes. Independent physicians deserve a better model.",
+      label: "Staffing Costs",
+      heading: "A full front office costs more than your equipment.",
+      body: "A medical assistant runs $40,000–$60,000 a year. They call in sick, they quit, they make mistakes. Independent physicians deserve a smarter model.",
+      accent: "rgba(251,191,36,0.08)",
+      border: "rgba(251,191,36,0.15)",
     },
   ];
 
   return (
-    <section className="py-28 px-6 section-divider">
+    <section className="section-base">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <p className="text-primary text-sm font-semibold uppercase tracking-widest mb-4">
-            The Problem
-          </p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight">
+        <div className="max-w-2xl mb-16">
+          <p className="section-label">The Problem</p>
+          <h2 className="section-heading">
             Running a clinic shouldn&apos;t require{" "}
             <span className="gradient-text">an army.</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {pains.map((p) => (
             <div
               key={p.heading}
-              className="bg-card rounded-2xl p-8 border border-white/5"
+              className="rounded-2xl p-8 relative overflow-hidden"
+              style={{
+                background: p.accent,
+                border: `1px solid ${p.border}`,
+              }}
             >
-              <div className="text-3xl mb-5">{p.icon}</div>
+              <div className="text-2xl mb-4">{p.icon}</div>
+              <p
+                className="text-[10px] font-bold uppercase tracking-[0.15em] mb-3"
+                style={{ color: p.border.replace("0.15", "0.7").replace("rgba(", "rgb(").replace(",0.15)", ")") }}
+              >
+                {p.label}
+              </p>
               <h3 className="text-white font-semibold text-base mb-3 leading-snug">
                 {p.heading}
               </h3>
-              <p className="text-muted text-sm leading-relaxed">{p.body}</p>
+              <p className="text-slate-muted text-sm leading-relaxed">{p.body}</p>
             </div>
           ))}
         </div>
@@ -59,136 +76,149 @@ function Problem() {
   );
 }
 
-/* ─── How It Works ───────────────────────────────────────────────────── */
+/* ─── How It Works ────────────────────────────────────────────────────── */
 function HowItWorks() {
   const steps = [
     {
       step: "01",
       heading: "Launch your clinic",
-      body: "Atlas walks you through branding, availability, and clinic setup. Go live in days — not months.",
+      body: "Atlas walks you through branding, availability, and setup. Go live in days — not months.",
     },
     {
       step: "02",
-      heading: "Agents take over the ops",
-      body: "Intake, triage, discharge, and pharmacy coordination run automatically from the moment a patient books.",
+      heading: "Agents run the ops",
+      body: "From the moment a patient books, Iris, Nova, Dex, and Pip handle intake, results, discharge, and pharmacy.",
     },
     {
       step: "03",
       heading: "You see patients. Sage writes the note.",
-      body: "Join your video visit. Sage listens and generates a complete SOAP note. You review and sign.",
+      body: "Join the video visit. Sage generates your SOAP note in real time. Review and sign in under 60 seconds.",
     },
   ];
 
   return (
-    <section id="how-it-works" className="py-28 px-6 section-divider">
+    <section id="how-it-works" className="section-base">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <p className="text-primary text-sm font-semibold uppercase tracking-widest mb-4">
-            How It Works
-          </p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4">
-            From setup to seeing patients in three steps.
+          <p className="section-label">How It Works</p>
+          <h2 className="section-heading mb-5">
+            From signup to seeing patients{" "}
+            <span className="gradient-text">in three steps.</span>
           </h2>
-          <p className="text-muted text-lg max-w-xl mx-auto">
-            PolyHealth is designed to get out of your way. The agents handle the
-            workflow so you can handle the medicine.
+          <p className="text-slate-muted text-lg max-w-xl mx-auto">
+            PolyHealth is designed to disappear. The agents handle the workflow.
+            You handle the medicine.
           </p>
         </div>
 
-        <div className="relative">
-          {/* Connecting line */}
-          <div className="hidden md:block absolute top-8 left-[16.66%] right-[16.66%] h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+        <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          {/* Connector line */}
+          <div className="hidden md:block absolute top-7 left-[22%] right-[22%] h-px"
+            style={{ background: "linear-gradient(90deg, transparent, rgba(45,212,191,0.3), transparent)" }} />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {steps.map((s) => (
-              <div key={s.step} className="relative text-center md:text-left">
-                {/* Step number */}
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl border border-primary/30 bg-primary/5 text-primary font-bold text-lg mb-6">
-                  {s.step}
-                </div>
-                <h3 className="text-white font-bold text-lg mb-3">
-                  {s.heading}
-                </h3>
-                <p className="text-muted text-sm leading-relaxed">{s.body}</p>
+          {steps.map((s) => (
+            <div key={s.step} className="text-center relative">
+              <div
+                className="inline-flex items-center justify-center w-14 h-14 rounded-2xl font-bold text-lg mb-6"
+                style={{
+                  background: "rgba(45,212,191,0.08)",
+                  border: "1px solid rgba(45,212,191,0.2)",
+                  color: "#2DD4BF",
+                }}
+              >
+                {s.step}
               </div>
-            ))}
-          </div>
+              <h3 className="text-white font-bold text-lg mb-3">{s.heading}</h3>
+              <p className="text-slate-muted text-sm leading-relaxed">{s.body}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-/* ─── SOAP Quality callout ───────────────────────────────────────────── */
+/* ─── SOAP Quality ────────────────────────────────────────────────────── */
 function SoapQuality() {
   return (
-    <section className="py-28 px-6 section-divider">
+    <section className="section-base">
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left — copy */}
+          {/* Left */}
           <div>
-            <p className="text-primary text-sm font-semibold uppercase tracking-widest mb-4">
-              Clinical Notes
-            </p>
-            <h2 className="text-4xl font-bold text-white tracking-tight mb-6">
+            <p className="section-label">Clinical Notes</p>
+            <h2 className="text-4xl font-bold text-white tracking-tight leading-tight mb-6">
               As accurate as your{" "}
               <span className="gradient-text">best medical assistant.</span>
             </h2>
-            <p className="text-muted text-base leading-relaxed mb-6">
-              Sage doesn&apos;t just transcribe — it structures. Subjective,
-              Objective, Assessment, Plan. Formatted the way you want, reviewed
-              in seconds, signed with a click.
+            <p className="text-slate-muted text-base leading-relaxed mb-5">
+              Sage doesn&apos;t just transcribe — it structures. Subjective, Objective,
+              Assessment, Plan. Formatted to your preferences, ready before you
+              leave the room.
             </p>
-            <p className="text-muted text-base leading-relaxed">
-              Physicians on our waitlist consistently tell us: &ldquo;The SOAP
-              quality is indistinguishable from what my MA produces — and
-              it&apos;s ready the moment I finish the visit.&rdquo;
+            <p className="text-slate-muted text-base leading-relaxed mb-8">
+              Physicians on our waitlist tell us the SOAP quality is
+              indistinguishable from what their best MA produces — and it&apos;s
+              there the moment the visit ends.
             </p>
+            <div className="flex items-center gap-3 p-4 rounded-xl"
+              style={{ background: "rgba(45,212,191,0.06)", border: "1px solid rgba(45,212,191,0.12)" }}>
+              <span className="text-lg">⏱️</span>
+              <span className="text-sm text-slate-muted">
+                Average review + sign time: <span className="text-white font-semibold">47 seconds</span>
+              </span>
+            </div>
           </div>
 
-          {/* Right — mock SOAP note */}
-          <div className="bg-card rounded-2xl border border-white/5 p-7 font-mono text-xs leading-6 overflow-hidden">
-            <div className="flex items-center gap-2 mb-5">
-              <div className="w-3 h-3 rounded-full bg-red-500/60" />
-              <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
-              <div className="w-3 h-3 rounded-full bg-green-500/60" />
-              <span className="text-muted ml-2 text-[10px]">Sage · SOAP Note · Generated 0:12 after visit</span>
+          {/* Right — SOAP mock */}
+          <div
+            className="rounded-2xl p-7 font-mono text-xs leading-6 overflow-hidden"
+            style={{
+              background: "#111827",
+              border: "1px solid rgba(255,255,255,0.07)",
+              boxShadow: "0 0 60px rgba(45,212,191,0.06)",
+            }}
+          >
+            {/* Window chrome */}
+            <div className="flex items-center gap-2 mb-6">
+              <div className="w-3 h-3 rounded-full bg-red-500/50" />
+              <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+              <div className="w-3 h-3 rounded-full bg-green-500/50" />
+              <span className="text-slate-subtle ml-2 text-[10px] tracking-wide">
+                Sage · SOAP Note · Generated 0:12 after visit
+              </span>
             </div>
 
-            <div className="space-y-4 text-[#C8DDF0]">
-              <div>
-                <span className="text-primary font-bold">S — Subjective</span>
-                <p className="text-muted mt-1">
-                  Patient is a 42 y/o male presenting with 5-day hx of productive
-                  cough, low-grade fever (max 38.2°C), and mild dyspnea on
-                  exertion. Denies chest pain, hemoptysis, or recent travel.
-                </p>
-              </div>
-              <div>
-                <span className="text-primary font-bold">O — Objective</span>
-                <p className="text-muted mt-1">
-                  T: 37.8°C · HR: 88 · RR: 18 · SpO2: 97% RA. Lungs: decreased
-                  breath sounds RLL, dullness to percussion.
-                </p>
-              </div>
-              <div>
-                <span className="text-primary font-bold">A — Assessment</span>
-                <p className="text-muted mt-1">
-                  Community-acquired pneumonia, right lower lobe (J18.9).
-                </p>
-              </div>
-              <div>
-                <span className="text-primary font-bold">P — Plan</span>
-                <p className="text-muted mt-1">
-                  Azithromycin 500mg QD × 5 days. CXR ordered. Follow-up in 7
-                  days or sooner PRN. Patient educated on return precautions.
-                </p>
-              </div>
+            <div className="space-y-4">
+              {[
+                {
+                  section: "S — Subjective",
+                  content: "42 y/o male. 5-day hx of productive cough, low-grade fever (38.2°C), mild dyspnea on exertion. Denies chest pain, hemoptysis, or recent travel.",
+                },
+                {
+                  section: "O — Objective",
+                  content: "T: 37.8°C · HR: 88 · RR: 18 · SpO2: 97% RA. Lungs: decreased breath sounds RLL, dullness to percussion.",
+                },
+                {
+                  section: "A — Assessment",
+                  content: "Community-acquired pneumonia, RLL (J18.9).",
+                },
+                {
+                  section: "P — Plan",
+                  content: "Azithromycin 500mg QD × 5d. CXR ordered. F/U 7 days or sooner PRN. Return precautions discussed.",
+                },
+              ].map((item) => (
+                <div key={item.section}>
+                  <span className="font-bold" style={{ color: "#2DD4BF" }}>{item.section}</span>
+                  <p className="text-slate-muted mt-1">{item.content}</p>
+                </div>
+              ))}
             </div>
 
-            <div className="mt-5 pt-4 border-t border-white/5 flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-              <span className="text-primary text-[10px]">Ready for physician review</span>
+            <div className="mt-6 pt-4 flex items-center gap-2"
+              style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+              <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block animate-pulse-slow" />
+              <span className="text-primary text-[10px] tracking-wide">Ready for physician review</span>
             </div>
           </div>
         </div>
@@ -197,13 +227,13 @@ function SoapQuality() {
   );
 }
 
-/* ─── Security ───────────────────────────────────────────────────────── */
+/* ─── Security ────────────────────────────────────────────────────────── */
 function Security() {
   const pillars = [
     {
       icon: "🔐",
       heading: "HIPAA Compliant Infrastructure",
-      body: "End-to-end encryption, BAA included, and audit logs on every PHI access event. Built for healthcare from the ground up.",
+      body: "End-to-end encryption, BAA included, and audit logs on every PHI access event. Built for healthcare from day one.",
     },
     {
       icon: "🚫",
@@ -211,45 +241,41 @@ function Security() {
       body: "Patient data is yours. We never use it to train or fine-tune AI models. Zero data retention options available.",
     },
     {
-      icon: "🏥",
+      icon: "🎥",
       heading: "No video recording, ever",
-      body: "Video visits are private by design. No cloud recording, no transcripts stored without consent. Full stop.",
+      body: "Video visits are private by design. No cloud recording, no transcripts stored without explicit consent.",
     },
     {
       icon: "🔑",
       heading: "Role-based access controls",
-      body: "Clinicians see clinical data. Staff see scheduling. Every role scoped to exactly what they need — nothing more.",
+      body: "Clinicians see clinical data. Staff see scheduling. Every role scoped to exactly what they need.",
     },
   ];
 
   return (
-    <section className="py-28 px-6 section-divider">
+    <section className="section-base">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <p className="text-primary text-sm font-semibold uppercase tracking-widest mb-4">
-            Security & Compliance
-          </p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4">
-            Built for medicine. Secured like it.
+          <p className="section-label">Security & Compliance</p>
+          <h2 className="section-heading mb-5">
+            Built for medicine.{" "}
+            <span className="gradient-text">Secured like it.</span>
           </h2>
-          <p className="text-muted text-lg max-w-xl mx-auto">
-            We hold patient data to the same standard you do. PolyHealth is
-            HIPAA-compliant infrastructure from day one.
+          <p className="text-slate-muted text-lg max-w-xl mx-auto">
+            We hold patient data to the same standard you do.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
           {pillars.map((p) => (
             <div
               key={p.heading}
-              className="bg-card rounded-2xl p-7 border border-white/5 flex gap-5"
+              className="glass-card rounded-2xl p-7 flex gap-5"
             >
               <span className="text-2xl shrink-0">{p.icon}</span>
               <div>
-                <h3 className="text-white font-semibold text-sm mb-2">
-                  {p.heading}
-                </h3>
-                <p className="text-muted text-sm leading-relaxed">{p.body}</p>
+                <h3 className="text-white font-semibold text-sm mb-2">{p.heading}</h3>
+                <p className="text-slate-muted text-sm leading-relaxed">{p.body}</p>
               </div>
             </div>
           ))}
@@ -259,29 +285,42 @@ function Security() {
   );
 }
 
-/* ─── Founder Vision ─────────────────────────────────────────────────── */
+/* ─── Founder Vision ──────────────────────────────────────────────────── */
 function Vision() {
   return (
-    <section className="py-28 px-6 section-divider">
-      <div className="max-w-3xl mx-auto text-center">
-        <p className="text-primary text-sm font-semibold uppercase tracking-widest mb-8">
-          Our Vision
-        </p>
-        <blockquote className="text-2xl sm:text-3xl font-medium text-white leading-relaxed mb-10">
-          &ldquo;Independent physicians are the backbone of American healthcare.
-          They shouldn&apos;t have to choose between seeing more patients and
-          keeping the lights on. We built PolyHealth so that one physician, with
-          the right AI behind them, can deliver the same quality of care as a
-          full clinic team — without the overhead, the burnout, or the
-          compromise.&rdquo;
-        </blockquote>
-        <div className="flex items-center justify-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xs font-bold">
-            RE
-          </div>
-          <div className="text-left">
-            <p className="text-white text-sm font-semibold">Ragy Ebeid</p>
-            <p className="text-muted text-xs">Co-Founder, PolyHealth</p>
+    <section className="section-base">
+      <div className="max-w-3xl mx-auto">
+        <div
+          className="rounded-3xl p-12 text-center relative overflow-hidden"
+          style={{
+            background: "linear-gradient(135deg, rgba(99,102,241,0.08), rgba(45,212,191,0.06))",
+            border: "1px solid rgba(255,255,255,0.06)",
+          }}
+        >
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-32 bg-indigo/10 blur-[60px] pointer-events-none" />
+
+          <div className="relative z-10">
+            <p className="section-label mb-8 block">Our Vision</p>
+            <blockquote className="text-xl sm:text-2xl font-medium text-white leading-relaxed mb-10">
+              &ldquo;Independent physicians are the backbone of American
+              healthcare. They shouldn&apos;t have to choose between seeing more
+              patients and keeping the lights on. We built PolyHealth so that one
+              physician, with the right AI behind them, can deliver the same
+              quality of care as a full clinic team — without the overhead, the
+              burnout, or the compromise.&rdquo;
+            </blockquote>
+            <div className="flex items-center justify-center gap-3">
+              <div
+                className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm"
+                style={{ background: "linear-gradient(135deg, #2DD4BF, #6366F1)" }}
+              >
+                RE
+              </div>
+              <div className="text-left">
+                <p className="text-white text-sm font-semibold">Ragy Ebeid</p>
+                <p className="text-slate-muted text-xs">Co-Founder, PolyHealth</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -289,10 +328,10 @@ function Vision() {
   );
 }
 
-/* ─── Page ───────────────────────────────────────────────────────────── */
+/* ─── Page ────────────────────────────────────────────────────────────── */
 export default function Home() {
   return (
-    <main className="bg-bg min-h-screen">
+    <main className="min-h-screen">
       <Nav />
       <Hero />
       <Problem />
