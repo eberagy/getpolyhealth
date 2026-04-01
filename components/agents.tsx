@@ -87,7 +87,7 @@ export default function Agents() {
                   alt={group.heading}
                   width={1200}
                   height={900}
-                  className="image-lift h-auto w-full rounded-[1.5rem]"
+                  className="image-lift aspect-[4/3] w-full rounded-[1.5rem] object-cover"
                 />
               </div>
 

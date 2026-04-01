@@ -73,7 +73,7 @@ export default function Hero() {
               alt="PolyHealth clinic launch and operations overview"
               width={1200}
               height={900}
-              className="image-lift h-auto w-full rounded-[1.5rem]"
+              className="image-lift aspect-[4/3] w-full rounded-[1.5rem] object-cover"
               priority
             />
           </div>
