@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Nav from "@/components/nav";
 import Hero from "@/components/hero";
 import Agents from "@/components/agents";
@@ -83,16 +84,19 @@ function HowItWorks() {
       step: "01",
       heading: "Launch your clinic",
       body: "The Clinic Launch Agent walks you through branding, availability, and setup so you can launch your own telehealth clinic in less than 48 hours.",
+      image: "/editorial/clinic-launch.svg",
     },
     {
       step: "02",
-      heading: "Agents run the ops",
+      heading: "Intake runs before the visit starts",
       body: "From the moment a patient books, the intake, triage, discharge, and pharmacy agents handle the repetitive operational work around the visit.",
+      image: "/editorial/intake-flow.svg",
     },
     {
       step: "03",
-      heading: "You see patients. The notes agent keeps up.",
+      heading: "Visits close with clear next steps",
       body: "Join the video visit. The Clinical Notes Agent generates a structured SOAP note in real time using your preferred note style and templates.",
+      image: "/editorial/visit-closeout.svg",
     },
   ];
 
@@ -111,25 +115,36 @@ function HowItWorks() {
           </p>
         </div>
 
-        <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          {/* Connector line */}
-          <div className="hidden md:block absolute top-7 left-[22%] right-[22%] h-px"
-            style={{ background: "linear-gradient(90deg, transparent, rgba(45,212,191,0.3), transparent)" }} />
-
+        <div className="grid max-w-5xl grid-cols-1 gap-6 mx-auto">
           {steps.map((s) => (
-            <div key={s.step} className="text-center relative">
-              <div
-                className="inline-flex items-center justify-center w-14 h-14 rounded-2xl font-bold text-lg mb-6"
-                style={{
-                  background: "rgba(45,212,191,0.08)",
-                  border: "1px solid rgba(45,212,191,0.2)",
-                  color: "#2DD4BF",
-                }}
-              >
-                {s.step}
+            <div
+              key={s.step}
+              className="glass-card grid items-center gap-6 rounded-[2rem] p-4 sm:p-5 md:grid-cols-[0.95fr_1.05fr]"
+            >
+              <div className="overflow-hidden rounded-[1.5rem] border border-white/[0.06] bg-white/[0.03]">
+                <Image
+                  src={s.image}
+                  alt={s.heading}
+                  width={1200}
+                  height={900}
+                  className="h-auto w-full"
+                />
               </div>
-              <h3 className="text-white font-bold text-lg mb-3">{s.heading}</h3>
-              <p className="text-slate-muted text-sm leading-relaxed">{s.body}</p>
+
+              <div className="px-2 sm:px-4">
+                <div
+                  className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl font-bold text-base"
+                  style={{
+                    background: "rgba(45,212,191,0.08)",
+                    border: "1px solid rgba(45,212,191,0.2)",
+                    color: "#2DD4BF",
+                  }}
+                >
+                  {s.step}
+                </div>
+                <h3 className="mb-3 text-2xl font-bold text-white">{s.heading}</h3>
+                <p className="text-base leading-relaxed text-slate-muted">{s.body}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -255,22 +270,22 @@ function Security() {
   return (
     <section className="section-base">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="max-w-3xl mb-16">
           <p className="section-label">Security & Compliance</p>
           <h2 className="section-heading mb-5">
             Built for medicine.{" "}
             <span className="gradient-text">Secured like it.</span>
           </h2>
-          <p className="text-slate-muted text-lg max-w-xl mx-auto">
+          <p className="text-slate-muted text-lg max-w-xl">
             We hold patient data to the same standard you do.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
-          {pillars.map((p) => (
+        <div className="grid max-w-5xl grid-cols-1 gap-0 rounded-[2rem] border border-white/[0.08] bg-white/[0.03] md:grid-cols-2">
+          {pillars.map((p, index) => (
             <div
               key={p.heading}
-              className="glass-card rounded-2xl p-7 flex gap-5"
+              className={`fade-up flex gap-5 border-t border-white/[0.06] p-7 first:border-t-0 md:border-t-0 md:[&:nth-child(odd)]:border-r md:border-white/[0.06] ${index === 0 ? "fade-delay-1" : index === 1 ? "fade-delay-2" : index === 2 ? "fade-delay-3" : "fade-delay-4"}`}
             >
               <span className="text-2xl shrink-0">{p.icon}</span>
               <div>

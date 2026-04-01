@@ -64,43 +64,40 @@ export default function DemoCTA() {
 
   return (
     <section id="demo" className="section-base">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <div
-          className="relative rounded-3xl p-12 text-center overflow-hidden"
+          className="fade-up relative overflow-hidden rounded-[2rem] border border-white/[0.08] bg-[#f5eee4] p-8 sm:p-10"
           style={{
-            background: "linear-gradient(135deg, rgba(45,212,191,0.07) 0%, rgba(99,102,241,0.10) 100%)",
-            border: "1px solid rgba(45,212,191,0.15)",
+            boxShadow: "0 24px 70px rgba(4, 10, 22, 0.22)",
           }}
         >
-          {/* Ambient orbs */}
-          <div className="absolute -top-16 -left-16 w-64 h-64 rounded-full bg-primary/8 blur-[80px] pointer-events-none" />
-          <div className="absolute -bottom-16 -right-16 w-64 h-64 rounded-full bg-indigo/8 blur-[80px] pointer-events-none" />
-
           <div className="relative z-10">
-            <p className="section-label mb-4 block">Get Started</p>
-            <h2 className="display-font text-4xl sm:text-5xl text-white tracking-tight mb-4 leading-tight">
+            <p className="mb-4 block text-xs font-semibold uppercase tracking-[0.18em] text-[#8d6a47]">
+              Get Started
+            </p>
+            <h2 className="display-font mb-4 text-4xl leading-tight tracking-tight text-[#1b2730] sm:text-5xl">
               {"You're going to "}
-              <span className="gradient-text">want to see this.</span>
+              <span className="text-[#567b72]">want to see this.</span>
             </h2>
-            <p className="text-slate-muted text-lg mb-10 max-w-xl mx-auto">
+            <p className="mb-10 max-w-xl text-lg text-[#5b6670]">
               {"Founder-led, 20 minutes, and tailored to your clinic. We'll"}
               show the full patient journey from booking to SOAP note to
               discharge.
             </p>
 
             {submitted ? (
-              <div className="flex flex-col items-center gap-4">
+              <div className="flex flex-col items-start gap-4">
                 <div
-                  className="w-14 h-14 rounded-full flex items-center justify-center text-2xl"
-                  style={{ background: "rgba(45,212,191,0.12)", border: "1px solid rgba(45,212,191,0.25)" }}
+                  className="flex h-14 w-14 items-center justify-center rounded-full text-2xl"
+                  style={{ background: "rgba(86,123,114,0.12)", border: "1px solid rgba(86,123,114,0.25)" }}
                 >
                   ✓
                 </div>
-                <p className="text-white font-bold text-xl">Request received.</p>
-                <p className="text-slate-muted text-sm">
+                <p className="text-xl font-bold text-[#1b2730]">Request received.</p>
+                <p className="text-sm text-[#5b6670]">
                   {"We'll reach out within 24 hours to schedule your demo."}
                 </p>
-                <div className="mt-2 flex flex-col sm:flex-row gap-3">
+                <div className="mt-2 flex flex-col gap-3 sm:flex-row">
                   <a
                     href={bookingUrl ?? "mailto:team@getpolyhealth.com?subject=PolyHealth%20Demo%20Request"}
                     className="btn-primary text-white"
@@ -116,7 +113,7 @@ export default function DemoCTA() {
               <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:text-left">
                 <form
                   onSubmit={handleSubmit}
-                  className="flex flex-col gap-3 max-w-lg mx-auto w-full lg:mx-0"
+                  className="mx-auto flex w-full max-w-lg flex-col gap-3 lg:mx-0"
                 >
                   <input
                     type="text"
@@ -140,7 +137,7 @@ export default function DemoCTA() {
                     { name: "specialty", label: "Specialty", placeholder: "Specialty", type: "text", required: true },
                   ].map((field) => (
                     <label key={field.name} className="flex flex-col gap-2">
-                      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-muted">
+                      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#6d7276]">
                         {field.label}
                       </span>
                       <input
@@ -162,17 +159,17 @@ export default function DemoCTA() {
                             [field.name]: e.target.value,
                           }))
                         }
-                        className="px-4 py-3.5 rounded-xl text-white placeholder:text-slate-subtle text-sm transition-colors"
+                        className="rounded-xl px-4 py-3.5 text-sm text-[#1b2730] placeholder:text-[#87919a] transition-colors"
                         style={{
-                          background: "rgba(255,255,255,0.05)",
-                          border: "1px solid rgba(255,255,255,0.08)",
+                          background: "rgba(255,255,255,0.72)",
+                          border: "1px solid rgba(27,39,48,0.08)",
                         }}
                       />
                     </label>
                   ))}
 
                   <label className="flex flex-col gap-2">
-                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-muted">
+                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#6d7276]">
                       Approximate monthly visit volume
                     </span>
                     <select
@@ -184,32 +181,32 @@ export default function DemoCTA() {
                           monthlyVisits: e.target.value,
                         }))
                       }
-                      className="px-4 py-3.5 rounded-xl text-white text-sm transition-colors"
+                      className="rounded-xl px-4 py-3.5 text-sm text-[#1b2730] transition-colors"
                       style={{
-                        background: "rgba(255,255,255,0.05)",
-                        border: "1px solid rgba(255,255,255,0.08)",
+                        background: "rgba(255,255,255,0.72)",
+                        border: "1px solid rgba(27,39,48,0.08)",
                       }}
                     >
-                      <option value="" className="bg-surface text-slate-muted">
+                      <option value="" className="bg-white text-[#5b6670]">
                         Select visit volume
                       </option>
-                      <option value="under-100" className="bg-surface">
+                      <option value="under-100" className="bg-white">
                         Under 100 visits
                       </option>
-                      <option value="100-300" className="bg-surface">
+                      <option value="100-300" className="bg-white">
                         100-300 visits
                       </option>
-                      <option value="300-600" className="bg-surface">
+                      <option value="300-600" className="bg-white">
                         300-600 visits
                       </option>
-                      <option value="600-plus" className="bg-surface">
+                      <option value="600-plus" className="bg-white">
                         600+ visits
                       </option>
                     </select>
                   </label>
 
                   <label className="flex flex-col gap-2">
-                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-muted">
+                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#6d7276]">
                       What do you want to see in the demo?
                     </span>
                     <textarea
@@ -223,10 +220,10 @@ export default function DemoCTA() {
                         }))
                       }
                       rows={4}
-                      className="px-4 py-3.5 rounded-xl text-white placeholder:text-slate-subtle text-sm transition-colors resize-none"
+                      className="resize-none rounded-xl px-4 py-3.5 text-sm text-[#1b2730] placeholder:text-[#87919a] transition-colors"
                       style={{
-                        background: "rgba(255,255,255,0.05)",
-                        border: "1px solid rgba(255,255,255,0.08)",
+                        background: "rgba(255,255,255,0.72)",
+                        border: "1px solid rgba(27,39,48,0.08)",
                       }}
                     />
                   </label>
@@ -238,38 +235,37 @@ export default function DemoCTA() {
                   >
                     {isSubmitting ? "Saving request..." : "Request a Demo"}
                   </button>
-                  <p className="text-slate-subtle text-xs mt-1">
+                  <p className="mt-1 text-xs text-[#7b848d]">
                     {"We'll reach out within 24 hours. No spam, ever."}
                   </p>
-                  {error ? <p className="text-sm text-rose-300">{error}</p> : null}
+                  {error ? <p className="text-sm text-rose-600">{error}</p> : null}
                 </form>
 
-                <div
-                  className="rounded-2xl border border-white/[0.08] bg-[#0f172a]/80 p-6 text-left"
-                  style={{ boxShadow: "0 16px 48px rgba(2, 6, 23, 0.35)" }}
-                >
-                  <p className="section-label mb-3 block">In Your Demo</p>
-                  <h3 className="text-white text-2xl font-semibold mb-4">
+                <div className="fade-up fade-delay-2 rounded-[1.75rem] border border-[#d7c7b4] bg-[#efe2d3] p-6 text-left">
+                  <p className="mb-3 block text-xs font-semibold uppercase tracking-[0.18em] text-[#8d6a47]">
+                    In Your Demo
+                  </p>
+                  <h3 className="mb-4 text-2xl font-semibold text-[#1b2730]">
                     We walk through the exact workflow your clinic would use.
                   </h3>
-                  <ul className="space-y-4 text-sm text-slate-muted">
+                  <ul className="space-y-4 text-sm text-[#5b6670]">
                     <li className="flex gap-3">
-                      <span className="mt-1 text-primary">01</span>
+                      <span className="mt-1 text-[#567b72]">01</span>
                       <span>Patient books and gets contacted automatically for intake.</span>
                     </li>
                     <li className="flex gap-3">
-                      <span className="mt-1 text-primary">02</span>
+                      <span className="mt-1 text-[#567b72]">02</span>
                       <span>Provider joins the visit with a prepared chart and AI-drafted note.</span>
                     </li>
                     <li className="flex gap-3">
-                      <span className="mt-1 text-primary">03</span>
+                      <span className="mt-1 text-[#567b72]">03</span>
                       <span>Discharge, follow-up, and pharmacy coordination happen automatically.</span>
                     </li>
                   </ul>
-                  <div className="mt-6 rounded-2xl border border-primary/10 bg-primary/5 px-4 py-4 text-sm text-slate-muted">
+                  <div className="mt-6 rounded-2xl border border-[#b8c9bf] bg-[#f7fbf8] px-4 py-4 text-sm text-[#5b6670]">
                     Best for independent physicians, small group practices, and telehealth-first clinics that want leverage before hiring more staff.
                   </div>
-                  <p className="mt-4 text-xs text-slate-subtle">
+                  <p className="mt-4 text-xs text-[#7b848d]">
                     Prefer to book directly? Use your scheduling link after submitting,
                     or email team@getpolyhealth.com.
                   </p>

@@ -39,10 +39,10 @@ export default function Team() {
 
         {/* Cards */}
         <div className="flex flex-col sm:flex-row justify-center gap-5 max-w-3xl mx-auto">
-          {team.map((member) => (
+          {team.map((member, index) => (
             <div
               key={member.name}
-              className="glass-card rounded-2xl p-8 flex-1"
+              className={`fade-up glass-card rounded-2xl p-8 flex-1 ${index === 0 ? "fade-delay-1" : "fade-delay-2"}`}
             >
               <div className="mb-6 flex items-center gap-4">
                 <div className="h-[76px] w-[76px] shrink-0 rounded-full overflow-hidden border border-white/10 ring-4 ring-white/[0.03] bg-surface-2">

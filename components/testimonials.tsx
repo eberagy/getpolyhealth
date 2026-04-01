@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const testimonials = [
   {
     quote:
@@ -6,7 +8,6 @@ const testimonials = [
     title: "Early design partner",
     initials: "PC",
     color: "rgba(45,212,191,0.15)",
-    border: "rgba(45,212,191,0.2)",
     text: "#2DD4BF",
   },
   {
@@ -16,7 +17,6 @@ const testimonials = [
     title: "Clinical innovation review",
     initials: "PM",
     color: "rgba(99,102,241,0.15)",
-    border: "rgba(99,102,241,0.2)",
     text: "#818CF8",
   },
   {
@@ -26,7 +26,6 @@ const testimonials = [
     title: "Workflow evaluation",
     initials: "CP",
     color: "rgba(251,191,36,0.12)",
-    border: "rgba(251,191,36,0.2)",
     text: "#FBB024",
   },
 ];
@@ -35,55 +34,51 @@ export default function Testimonials() {
   return (
     <section className="section-base">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-16">
+        <div className="max-w-3xl mb-16">
           <p className="section-label">Design Partners</p>
           <h2 className="section-heading">
             Built for real clinic workflows,
             <span className="gradient-text"> not generic demos.</span>
           </h2>
-          <p className="mt-4 text-sm text-slate-subtle max-w-2xl mx-auto">
+          <p className="mt-4 max-w-2xl text-sm text-slate-subtle">
             Representative feedback from early design conversations and workflow reviews.
             These are not claims about patient outcomes or guaranteed operational results.
           </p>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {testimonials.map((t) => (
-            <div
-              key={t.name}
-              className="glass-card rounded-2xl p-8 flex flex-col gap-5"
-              style={{ borderColor: t.border }}
-            >
-              {/* Large quote mark */}
-              <svg width="32" height="24" viewBox="0 0 32 24" fill="none">
-                <path
-                  d="M0 24V14.4C0 6.08 4.48 1.28 13.44 0l1.92 3.2C10.88 4.16 8.64 6.4 8 10.4H14V24H0ZM18 24V14.4C18 6.08 22.48 1.28 31.44 0L33.36 3.2C28.88 4.16 26.64 6.4 26 10.4H32V24H18Z"
-                  fill={t.text}
-                  fillOpacity={0.25}
-                />
-              </svg>
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="fade-up overflow-hidden rounded-[2rem] border border-white/[0.08] bg-white/[0.03] p-3">
+            <Image
+              src="https://images.unsplash.com/photo-1758691461935-202e2ef6b69f?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=2200"
+              alt="Editorial trust visual"
+              width={1200}
+              height={900}
+              className="image-lift h-auto w-full rounded-[1.5rem]"
+            />
+          </div>
 
-              <p className="text-[#C8D8E8] text-sm leading-relaxed flex-1">
-                {t.quote}
-              </p>
-
-              {/* Author */}
-              <div className="flex items-center gap-3 pt-4 border-t border-white/[0.06]">
-                <div
-                  className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
-                  style={{ background: t.color, color: t.text }}
-                >
-                  {t.initials}
-                </div>
-                <div>
-                  <p className="text-white text-sm font-semibold">{t.name}</p>
-                  <p className="text-slate-muted text-xs">{t.title}</p>
+          <div className="flex flex-col justify-center gap-5">
+            {testimonials.map((t, index) => (
+              <div
+                key={t.name}
+                className={`fade-up border-t pt-5 ${index === 0 ? "border-white/[0.1] fade-delay-1" : index === 1 ? "border-white/[0.06] fade-delay-2" : "border-white/[0.06] fade-delay-3"}`}
+              >
+                <p className="text-base leading-relaxed text-slate-text">{t.quote}</p>
+                <div className="mt-4 flex items-center gap-3">
+                  <div
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-xs font-bold"
+                    style={{ background: t.color, color: t.text }}
+                  >
+                    {t.initials}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-white">{t.name}</p>
+                    <p className="text-xs text-slate-muted">{t.title}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

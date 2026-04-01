@@ -1,69 +1,60 @@
-const agents = [
+import Image from "next/image";
+
+const agentGroups = [
   {
-    name: "Clinic Launch Agent",
-    role: "Setup, onboarding, and launch workflows",
-    iconClass: "agent-icon-indigo",
-    iconEmoji: "🚀",
-    description:
-      "Sets up your practice, configures availability, and helps you go live quickly. Tailor onboarding steps, messaging, and scheduling rules to match how your clinic operates.",
-    tag: null,
-    accent: "rgba(99,102,241,0.12)",
-    accentBorder: "rgba(99,102,241,0.2)",
+    label: "Launch",
+    heading: "Start with setup and intake that already fit your clinic.",
+    body:
+      "PolyHealth handles the first operational layer before the visit begins, from launch configuration to patient intake workflows shaped around your forms and messaging.",
+    image: "https://images.unsplash.com/photo-1752412145526-98cd9dc29649?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=2200",
+    tone: "soft",
+    agents: [
+      {
+        name: "Clinic Launch Agent",
+        role: "Setup, onboarding, and launch workflows",
+      },
+      {
+        name: "Patient Intake Agent",
+        role: "Pre-visit outreach and form completion",
+      },
+    ],
   },
   {
-    name: "Patient Intake Agent",
-    role: "Pre-visit outreach and form completion",
-    iconClass: "agent-icon-teal",
-    iconEmoji: "📋",
-    description:
-      "Calls or messages patients before appointments, collects symptoms, medications, and history, and can follow your exact intake forms and question flows.",
-    tag: null,
-    accent: "rgba(45,212,191,0.10)",
-    accentBorder: "rgba(45,212,191,0.2)",
+    label: "Coordinate",
+    heading: "Keep results and pharmacy follow-through connected.",
+    body:
+      "Triage, results delivery, refill workflows, and pharmacy callbacks stay inside one operational system instead of breaking into separate manual threads.",
+    image: "https://images.unsplash.com/photo-1758691462848-31a39258dbd8?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=2200",
+    tone: "dark",
+    agents: [
+      {
+        name: "Results & Triage Agent",
+        role: "Results delivery and escalation logic",
+      },
+      {
+        name: "Pharmacy Coordination Agent",
+        role: "Refills, prior auth, and pharmacy callbacks",
+        tag: "e-Rx Coming Soon",
+      },
+    ],
   },
   {
-    name: "Results & Triage Agent",
-    role: "Results delivery and escalation logic",
-    iconClass: "agent-icon-amber",
-    iconEmoji: "🔬",
-    description:
-      "Delivers lab results, imaging reports, and follow-up instructions directly to patients, while escalating time-sensitive cases based on your triage rules.",
-    tag: null,
-    accent: "rgba(251,191,36,0.10)",
-    accentBorder: "rgba(251,191,36,0.2)",
-  },
-  {
-    name: "Discharge & Follow-Up Agent",
-    role: "Post-visit instructions and next steps",
-    iconClass: "agent-icon-emerald",
-    iconEmoji: "📤",
-    description:
-      "Sends discharge instructions, medication reminders, and follow-up scheduling the moment a visit closes, using your preferred templates and patient education materials.",
-    tag: null,
-    accent: "rgba(16,185,129,0.10)",
-    accentBorder: "rgba(16,185,129,0.2)",
-  },
-  {
-    name: "Pharmacy Coordination Agent",
-    role: "Refills, prior auth, and pharmacy callbacks",
-    iconClass: "agent-icon-violet",
-    iconEmoji: "💊",
-    description:
-      "Handles prior authorizations, refill requests, and pharmacy callbacks, with workflows you can customize around your medication policies and staff process.",
-    tag: "e-Rx Coming Soon",
-    accent: "rgba(167,139,250,0.10)",
-    accentBorder: "rgba(167,139,250,0.2)",
-  },
-  {
-    name: "Clinical Notes Agent",
-    role: "SOAP generation shaped to your templates",
-    iconClass: "agent-icon-sky",
-    iconEmoji: "📝",
-    description:
-      "Generates structured SOAP notes from every visit and can follow your note style, clinical templates, and uploaded forms so review stays fast and consistent.",
-    tag: null,
-    accent: "rgba(56,189,248,0.10)",
-    accentBorder: "rgba(56,189,248,0.2)",
+    label: "Closeout",
+    heading: "End each visit with notes and follow-up already in motion.",
+    body:
+      "The visit closes with structured documentation, discharge guidance, and next-step communication, so patients and providers leave with clarity.",
+    image: "https://images.unsplash.com/photo-1758691461935-202e2ef6b69f?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=2200",
+    tone: "warm",
+    agents: [
+      {
+        name: "Clinical Notes Agent",
+        role: "SOAP generation shaped to your templates",
+      },
+      {
+        name: "Discharge & Follow-Up Agent",
+        role: "Post-visit instructions and next steps",
+      },
+    ],
   },
 ];
 
@@ -71,68 +62,62 @@ export default function Agents() {
   return (
     <section id="agents" className="section-base">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="max-w-2xl mb-16">
+        <div className="max-w-3xl mb-16">
           <p className="section-label">The Agent Stack</p>
           <h2 className="section-heading mb-5">
             Six fully customizable AI agents.<br />
             <span className="gradient-text">One complete clinic operating system.</span>
           </h2>
           <p className="text-slate-muted text-lg leading-relaxed">
-            Each agent owns a specific part of the patient journey, from first
-            contact to final note. You can tailor scripts, forms, discharge
-            instructions, and workflows so PolyHealth matches your clinic
-            instead of forcing a rigid template.
+            PolyHealth matches your clinic instead of forcing a rigid template.
+            The system is organized around the actual flow of a visit, not a
+            grid of disconnected AI features.
           </p>
         </div>
 
-        {/* Agent grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {agents.map((agent) => (
+        <div className="grid grid-cols-1 gap-8">
+          {agentGroups.map((group, index) => (
             <div
-              key={agent.name}
-              className="glass-card rounded-2xl p-7 group relative overflow-hidden"
+              key={group.heading}
+              className={`fade-up grid items-center gap-6 lg:grid-cols-[1.1fr_0.9fr] ${index === 1 ? "lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1" : ""} ${index === 0 ? "fade-delay-1" : index === 1 ? "fade-delay-2" : "fade-delay-3"}`}
             >
-              {/* Subtle accent glow on hover */}
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none"
-                style={{ background: `radial-gradient(ellipse 80% 60% at 0% 0%, ${agent.accent}, transparent)` }}
-              />
-
-              {/* Coming soon badge */}
-              {agent.tag && (
-                <span
-                  className="absolute top-5 right-5 text-[10px] px-2.5 py-1 rounded-full font-semibold"
-                  style={{
-                    background: "rgba(167,139,250,0.12)",
-                    border: "1px solid rgba(167,139,250,0.25)",
-                    color: "#A78BFA",
-                  }}
-                >
-                  {agent.tag}
-                </span>
-              )}
-
-              {/* Icon */}
-              <div
-                className={`w-11 h-11 rounded-xl flex items-center justify-center text-lg mb-5 border ${agent.iconClass}`}
-              >
-                {agent.iconEmoji}
+              <div className="overflow-hidden rounded-[2rem] border border-white/[0.08] bg-white/[0.03] p-3">
+                <Image
+                  src={group.image}
+                  alt={group.heading}
+                  width={1200}
+                  height={900}
+                  className="image-lift h-auto w-full rounded-[1.5rem]"
+                />
               </div>
 
-              {/* Name + role */}
-              <div className="mb-3 relative z-10">
-                <span className="text-white font-bold text-base">{agent.name}</span>
-                <span className="text-slate-subtle mx-2 text-xs">·</span>
-                <span className="text-xs font-medium" style={{ color: agent.accentBorder.replace("0.2", "1").replace("rgba(", "rgb(").replace(",0.2)", ")") }}>
-                  {agent.role}
-                </span>
-              </div>
+              <div className="max-w-xl">
+                <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-slate-subtle">
+                  {group.label}
+                </p>
+                <h3 className="display-font mb-4 text-3xl leading-tight text-white sm:text-4xl">
+                  {group.heading}
+                </h3>
+                <p className="mb-8 text-base leading-relaxed text-slate-muted">
+                  {group.body}
+                </p>
 
-              {/* Description */}
-              <p className="text-slate-muted text-sm leading-relaxed relative z-10">
-                {agent.description}
-              </p>
+                <div className="space-y-4 border-t border-white/[0.08] pt-6">
+                  {group.agents.map((agent) => (
+                    <div key={agent.name} className="flex items-start justify-between gap-4">
+                      <div>
+                        <p className="text-lg font-semibold text-white">{agent.name}</p>
+                        <p className="mt-1 text-sm leading-relaxed text-slate-muted">{agent.role}</p>
+                      </div>
+                      {agent.tag ? (
+                        <span className="shrink-0 rounded-full border border-white/[0.12] bg-white/[0.04] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-muted">
+                          {agent.tag}
+                        </span>
+                      ) : null}
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           ))}
         </div>
