@@ -1,4 +1,4 @@
-import { siteConfig } from "@/lib/site-config";
+import nodemailer from "nodemailer";
 import type { DemoRequest } from "@/lib/demo-requests";
 
 function buildEmailHtml(submission: DemoRequest) {
@@ -14,68 +14,75 @@ function buildEmailHtml(submission: DemoRequest) {
   `;
 }
 
+function buildEmailText(submission: DemoRequest) {
+  return [
+    "New PolyHealth Demo Request",
+    `Name: ${submission.name}`,
+    `Email: ${submission.email}`,
+    `Clinic: ${submission.clinicName}`,
+    `Specialty: ${submission.specialty}`,
+    `Monthly Visits: ${submission.monthlyVisits || "Not provided"}`,
+    `Notes: ${submission.notes || "None"}`,
+    `Created At: ${submission.createdAt}`,
+  ].join("\n");
+}
+
 export async function deliverDemoRequest(submission: DemoRequest) {
-  const webhookUrl = process.env.DEMO_REQUEST_WEBHOOK_URL?.trim();
-  const resendApiKey = process.env.RESEND_API_KEY?.trim();
-  const notifyEmail =
-    process.env.DEMO_REQUEST_NOTIFY_EMAIL?.trim() || siteConfig.supportEmail;
+  const smtpHost = process.env.SMTP_HOST?.trim();
+  const smtpPort = Number(process.env.SMTP_PORT);
+  const smtpUser = process.env.SMTP_USER?.trim();
+  const smtpPass = process.env.SMTP_PASS?.trim();
+  const notifyEmail = process.env.DEMO_REQUEST_NOTIFY_EMAIL?.trim();
+  const fromEmail = process.env.DEMO_REQUEST_FROM_EMAIL?.trim();
 
-  const tasks: Promise<Response>[] = [];
-
-  if (webhookUrl) {
-    tasks.push(
-      fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(submission),
-      }),
-    );
+  if (!smtpHost) {
+    throw new Error("Missing SMTP_HOST.");
   }
 
-  if (resendApiKey && notifyEmail) {
-    tasks.push(
-      fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${resendApiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from:
-            process.env.DEMO_REQUEST_FROM_EMAIL?.trim() ||
-            "PolyHealth Demo <demo@getpolyhealth.com>",
-          to: [notifyEmail],
-          subject: `New demo request from ${submission.name}`,
-          reply_to: submission.email,
-          html: buildEmailHtml(submission),
-        }),
-      }),
-    );
+  if (!Number.isFinite(smtpPort) || smtpPort <= 0) {
+    throw new Error("Missing or invalid SMTP_PORT.");
   }
 
-  if (!tasks.length) {
-    return {
-      delivered: false,
-      channels: [],
-    };
+  if (!smtpUser) {
+    throw new Error("Missing SMTP_USER.");
   }
 
-  const results = await Promise.allSettled(tasks);
-  const failures = results.filter(
-    (result) => result.status === "rejected" || !result.value.ok,
-  );
-
-  if (failures.length === results.length) {
-    throw new Error("All outbound lead delivery methods failed.");
+  if (!smtpPass) {
+    throw new Error("Missing SMTP_PASS.");
   }
+
+  if (!notifyEmail) {
+    throw new Error("Missing DEMO_REQUEST_NOTIFY_EMAIL.");
+  }
+
+  if (!fromEmail) {
+    throw new Error("Missing DEMO_REQUEST_FROM_EMAIL.");
+  }
+
+  const transporter = nodemailer.createTransport({
+    host: smtpHost,
+    port: smtpPort,
+    secure: smtpPort === 465,
+    auth: {
+      user: smtpUser,
+      pass: smtpPass,
+    },
+  });
+
+  const info = await transporter.sendMail({
+    from: fromEmail,
+    to: notifyEmail,
+    subject: `New demo request from ${submission.name}`,
+    replyTo: submission.email,
+    html: buildEmailHtml(submission),
+    text: buildEmailText(submission),
+  });
 
   return {
     delivered: true,
     channels: {
-      webhook: Boolean(webhookUrl),
-      resend: Boolean(resendApiKey && notifyEmail),
+      smtp: true,
     },
+    id: info.messageId,
   };
 }

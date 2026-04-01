@@ -37,8 +37,8 @@ export default function TermsPage() {
           </p>
           <p>
             Questions about these terms can be sent to{" "}
-            <a className="text-primary hover:text-white" href="mailto:team@getpolyhealth.com">
-              team@getpolyhealth.com
+            <a className="text-primary hover:text-white" href="mailto:founder@telemd.app">
+              founder@telemd.app
             </a>.
           </p>
         </div>

@@ -37,7 +37,7 @@ export default function PrivacyPage() {
           </p>
           <p>
             To request deletion of your submitted information or ask a privacy
-            question, contact <a className="text-primary hover:text-white" href="mailto:team@getpolyhealth.com">team@getpolyhealth.com</a>.
+            question, contact <a className="text-primary hover:text-white" href="mailto:founder@telemd.app">founder@telemd.app</a>.
           </p>
         </div>
       </div>

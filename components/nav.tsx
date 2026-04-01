@@ -1,21 +1,18 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
+import polyhealthLogo from "@/polyhealthLogo.png";
 
-function Logo({ size = 28 }: { size?: number }) {
+function Logo({ width = 220 }: { width?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#2DD4BF" />
-          <stop offset="100%" stopColor="#6366F1" />
-        </linearGradient>
-      </defs>
-      <rect width="32" height="32" rx="8" fill="url(#logoGrad)" />
-      {/* Stylised P — bold left bar + rounded top arm */}
-      <rect x="9" y="8" width="4" height="16" rx="2" fill="white" />
-      <path d="M13 8h4a5 5 0 010 10h-4V8z" fill="white" />
-    </svg>
+    <Image
+      src={polyhealthLogo}
+      alt="PolyHealth logo"
+      width={width}
+      priority
+      className="h-auto w-auto max-h-24 object-contain"
+    />
   );
 }
 
@@ -39,13 +36,10 @@ export default function Nav() {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2.5 group">
-          <Logo size={28} />
-          <span className="font-bold text-white text-[1.1rem] tracking-tight">
-            Poly<span className="text-primary">Health</span>
-          </span>
+        <a href="#" className="flex items-center group">
+          <Logo width={220} />
         </a>
 
         {/* Desktop nav */}

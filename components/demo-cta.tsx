@@ -13,6 +13,24 @@ type DemoRequestPayload = {
   startedAt: number;
 };
 
+type DemoRequestResponse = {
+  error?: string;
+};
+
+async function readDemoResponse(response: Response): Promise<DemoRequestResponse> {
+  const rawBody = await response.text();
+
+  if (!rawBody) {
+    return {};
+  }
+
+  try {
+    return JSON.parse(rawBody) as DemoRequestResponse;
+  } catch {
+    return {};
+  }
+}
+
 export default function DemoCTA() {
   const [form, setForm] = useState<DemoRequestPayload>({
     name: "",
@@ -27,7 +45,6 @@ export default function DemoCTA() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [bookingUrl, setBookingUrl] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -43,13 +60,14 @@ export default function DemoCTA() {
         body: JSON.stringify(form),
       });
 
-      const data = (await response.json()) as { bookingUrl?: string; error?: string };
+      const data = await readDemoResponse(response);
 
       if (!response.ok) {
-        throw new Error(data.error || "Request failed");
+        throw new Error(
+          data.error || "We couldn't process your request. Please try again.",
+        );
       }
 
-      setBookingUrl(data.bookingUrl ?? null);
       setSubmitted(true);
     } catch (submitError) {
       if (submitError instanceof Error) {
@@ -80,9 +98,8 @@ export default function DemoCTA() {
               <span className="text-[#567b72]">want to see this.</span>
             </h2>
             <p className="mb-10 max-w-xl text-lg text-[#5b6670]">
-              {"Founder-led, 20 minutes, and tailored to your clinic. We'll"}
-              show the full patient journey from booking to SOAP note to
-              discharge.
+              Share a few details about your clinic and what you want to see.
+              We&apos;ll review the request and follow up by email.
             </p>
 
             {submitted ? (
@@ -95,19 +112,12 @@ export default function DemoCTA() {
                 </div>
                 <p className="text-xl font-bold text-[#1b2730]">Request received.</p>
                 <p className="text-sm text-[#5b6670]">
-                  {"We'll reach out within 24 hours to schedule your demo."}
+                  We&apos;ve emailed your request details to our team. We&apos;ll
+                  follow up by email within 24 hours.
                 </p>
-                <div className="mt-2 flex flex-col gap-3 sm:flex-row">
-                  <a
-                    href={bookingUrl ?? "mailto:team@getpolyhealth.com?subject=PolyHealth%20Demo%20Request"}
-                    className="btn-primary text-white"
-                  >
-                    Book a Time Now
-                  </a>
-                  <a href="mailto:team@getpolyhealth.com" className="btn-secondary">
-                    Email the Team
-                  </a>
-                </div>
+                <a href="mailto:founder@telemd.app" className="btn-secondary mt-2">
+                  Email the Team
+                </a>
               </div>
             ) : (
               <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:text-left">
@@ -266,8 +276,8 @@ export default function DemoCTA() {
                     Best for independent physicians, small group practices, and telehealth-first clinics that want leverage before hiring more staff.
                   </div>
                   <p className="mt-4 text-xs text-[#7b848d]">
-                    Prefer to book directly? Use your scheduling link after submitting,
-                    or email team@getpolyhealth.com.
+                    We&apos;ll follow up by email after reviewing your request,
+                    or you can contact founder@telemd.app directly.
                   </p>
                 </div>
               </div>

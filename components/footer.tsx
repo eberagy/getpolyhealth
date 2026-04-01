@@ -6,11 +6,8 @@ export default function Footer() {
     <footer className="border-t border-white/[0.05] px-6 py-12">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
         {/* Logo */}
-        <div className="flex items-center gap-2.5">
-          <Logo size={22} />
-          <span className="font-bold text-white tracking-tight">
-            Poly<span className="text-primary">Health</span>
-          </span>
+        <div className="flex items-center">
+          <Logo width={180} />
         </div>
 
         {/* Links */}
@@ -21,8 +18,8 @@ export default function Footer() {
           <a href="#demo" className="hover:text-white transition-colors">Request Demo</a>
           <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
           <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
-          <a href="mailto:team@getpolyhealth.com" className="hover:text-white transition-colors">
-            team@getpolyhealth.com
+          <a href="mailto:founder@telemd.app" className="hover:text-white transition-colors">
+            founder@telemd.app
           </a>
         </div>
 
