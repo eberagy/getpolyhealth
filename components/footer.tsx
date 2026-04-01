@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Logo } from "@/components/nav";
 
 export default function Footer() {
@@ -18,6 +19,8 @@ export default function Footer() {
           <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
           <a href="#team" className="hover:text-white transition-colors">Team</a>
           <a href="#demo" className="hover:text-white transition-colors">Request Demo</a>
+          <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+          <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
           <a href="mailto:team@getpolyhealth.com" className="hover:text-white transition-colors">
             team@getpolyhealth.com
           </a>

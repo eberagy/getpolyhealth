@@ -9,6 +9,8 @@ type DemoRequestPayload = {
   specialty: string;
   monthlyVisits: string;
   notes: string;
+  website: string;
+  startedAt: number;
 };
 
 export default function DemoCTA() {
@@ -19,10 +21,13 @@ export default function DemoCTA() {
     specialty: "",
     monthlyVisits: "",
     notes: "",
+    website: "",
+    startedAt: Date.now(),
   });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [bookingUrl, setBookingUrl] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -38,13 +43,20 @@ export default function DemoCTA() {
         body: JSON.stringify(form),
       });
 
+      const data = (await response.json()) as { bookingUrl?: string; error?: string };
+
       if (!response.ok) {
-        throw new Error("Request failed");
+        throw new Error(data.error || "Request failed");
       }
 
+      setBookingUrl(data.bookingUrl ?? null);
       setSubmitted(true);
-    } catch {
-      setError("We couldn't save your request. Please try again.");
+    } catch (submitError) {
+      if (submitError instanceof Error) {
+        setError(submitError.message);
+      } else {
+        setError("We couldn't save your request. Please try again.");
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -88,6 +100,17 @@ export default function DemoCTA() {
                 <p className="text-slate-muted text-sm">
                   We&apos;ll reach out within 24 hours to schedule your demo.
                 </p>
+                <div className="mt-2 flex flex-col sm:flex-row gap-3">
+                  <a
+                    href={bookingUrl ?? "mailto:team@getpolyhealth.com?subject=PolyHealth%20Demo%20Request"}
+                    className="btn-primary text-white"
+                  >
+                    Book a Time Now
+                  </a>
+                  <a href="mailto:team@getpolyhealth.com" className="btn-secondary">
+                    Email the Team
+                  </a>
+                </div>
               </div>
             ) : (
               <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:text-left">
@@ -95,89 +118,118 @@ export default function DemoCTA() {
                   onSubmit={handleSubmit}
                   className="flex flex-col gap-3 max-w-lg mx-auto w-full lg:mx-0"
                 >
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={form.website}
+                    onChange={(e) =>
+                      setForm((current) => ({
+                        ...current,
+                        website: e.target.value,
+                      }))
+                    }
+                    className="hidden"
+                    aria-hidden="true"
+                  />
                   {[
-                    { name: "name", placeholder: "Your name", type: "text", required: true },
-                    { name: "email", placeholder: "Work email", type: "email", required: true },
-                    { name: "clinicName", placeholder: "Clinic or practice name", type: "text", required: true },
-                    { name: "specialty", placeholder: "Specialty", type: "text", required: true },
+                    { name: "name", label: "Your name", placeholder: "Your name", type: "text", required: true },
+                    { name: "email", label: "Work email", placeholder: "Work email", type: "email", required: true },
+                    { name: "clinicName", label: "Clinic or practice name", placeholder: "Clinic or practice name", type: "text", required: true },
+                    { name: "specialty", label: "Specialty", placeholder: "Specialty", type: "text", required: true },
                   ].map((field) => (
-                    <input
-                      key={field.name}
-                      type={field.type}
-                      name={field.name}
-                      placeholder={field.placeholder}
-                      required={field.required}
-                      autoComplete={
-                        field.name === "name"
-                          ? "name"
-                          : field.name === "email"
-                            ? "email"
-                            : "organization"
-                      }
-                      value={form[field.name as keyof DemoRequestPayload]}
+                    <label key={field.name} className="flex flex-col gap-2">
+                      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-muted">
+                        {field.label}
+                      </span>
+                      <input
+                        type={field.type}
+                        name={field.name}
+                        placeholder={field.placeholder}
+                        required={field.required}
+                        autoComplete={
+                          field.name === "name"
+                            ? "name"
+                            : field.name === "email"
+                              ? "email"
+                              : "organization"
+                        }
+                        value={form[field.name as keyof DemoRequestPayload]}
+                        onChange={(e) =>
+                          setForm((current) => ({
+                            ...current,
+                            [field.name]: e.target.value,
+                          }))
+                        }
+                        className="px-4 py-3.5 rounded-xl text-white placeholder:text-slate-subtle text-sm transition-colors"
+                        style={{
+                          background: "rgba(255,255,255,0.05)",
+                          border: "1px solid rgba(255,255,255,0.08)",
+                        }}
+                      />
+                    </label>
+                  ))}
+
+                  <label className="flex flex-col gap-2">
+                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-muted">
+                      Approximate monthly visit volume
+                    </span>
+                    <select
+                      name="monthlyVisits"
+                      value={form.monthlyVisits}
                       onChange={(e) =>
                         setForm((current) => ({
                           ...current,
-                          [field.name]: e.target.value,
+                          monthlyVisits: e.target.value,
                         }))
                       }
-                      className="px-4 py-3.5 rounded-xl text-white placeholder:text-slate-subtle text-sm transition-colors"
+                      className="px-4 py-3.5 rounded-xl text-white text-sm transition-colors"
+                      style={{
+                        background: "rgba(255,255,255,0.05)",
+                        border: "1px solid rgba(255,255,255,0.08)",
+                      }}
+                    >
+                      <option value="" className="bg-surface text-slate-muted">
+                        Select visit volume
+                      </option>
+                      <option value="under-100" className="bg-surface">
+                        Under 100 visits
+                      </option>
+                      <option value="100-300" className="bg-surface">
+                        100-300 visits
+                      </option>
+                      <option value="300-600" className="bg-surface">
+                        300-600 visits
+                      </option>
+                      <option value="600-plus" className="bg-surface">
+                        600+ visits
+                      </option>
+                    </select>
+                  </label>
+
+                  <label className="flex flex-col gap-2">
+                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-muted">
+                      What do you want to see in the demo?
+                    </span>
+                    <textarea
+                      name="notes"
+                      placeholder="What do you want to see in the demo?"
+                      value={form.notes}
+                      onChange={(e) =>
+                        setForm((current) => ({
+                          ...current,
+                          notes: e.target.value,
+                        }))
+                      }
+                      rows={4}
+                      className="px-4 py-3.5 rounded-xl text-white placeholder:text-slate-subtle text-sm transition-colors resize-none"
                       style={{
                         background: "rgba(255,255,255,0.05)",
                         border: "1px solid rgba(255,255,255,0.08)",
                       }}
                     />
-                  ))}
-
-                  <select
-                    name="monthlyVisits"
-                    value={form.monthlyVisits}
-                    onChange={(e) =>
-                      setForm((current) => ({
-                        ...current,
-                        monthlyVisits: e.target.value,
-                      }))
-                    }
-                    className="px-4 py-3.5 rounded-xl text-white text-sm transition-colors"
-                    style={{
-                      background: "rgba(255,255,255,0.05)",
-                      border: "1px solid rgba(255,255,255,0.08)",
-                    }}
-                  >
-                    <option value="" className="bg-surface text-slate-muted">
-                      Approximate monthly visit volume
-                    </option>
-                    <option value="under-100" className="bg-surface">
-                      Under 100 visits
-                    </option>
-                    <option value="100-300" className="bg-surface">
-                      100-300 visits
-                    </option>
-                    <option value="300-600" className="bg-surface">
-                      300-600 visits
-                    </option>
-                    <option value="600-plus" className="bg-surface">
-                      600+ visits
-                    </option>
-                  </select>
-
-                  <textarea
-                    name="notes"
-                    placeholder="What do you want to see in the demo?"
-                    value={form.notes}
-                    onChange={(e) =>
-                      setForm((current) => ({
-                        ...current,
-                        notes: e.target.value,
-                      }))
-                    }
-                    rows={4}
-                    className="px-4 py-3.5 rounded-xl text-white placeholder:text-slate-subtle text-sm transition-colors resize-none"
-                    style={{
-                      background: "rgba(255,255,255,0.05)",
-                      border: "1px solid rgba(255,255,255,0.08)",
-                    }}
-                  />
+                  </label>
 
                   <button
                     type="submit"
@@ -217,6 +269,10 @@ export default function DemoCTA() {
                   <div className="mt-6 rounded-2xl border border-primary/10 bg-primary/5 px-4 py-4 text-sm text-slate-muted">
                     Best for independent physicians, small group practices, and telehealth-first clinics that want leverage before hiring more staff.
                   </div>
+                  <p className="mt-4 text-xs text-slate-subtle">
+                    Prefer to book directly? Use your scheduling link after submitting,
+                    or email team@getpolyhealth.com.
+                  </p>
                 </div>
               </div>
             )}

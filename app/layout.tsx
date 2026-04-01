@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
+import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -24,6 +26,7 @@ export const metadata: Metadata = {
       "See the founder-led PolyHealth demo for independent physicians.",
     type: "website",
     siteName: "GetPolyHealth",
+    url: "https://www.getpolyhealth.com",
   },
   twitter: {
     card: "summary_large_image",
@@ -38,9 +41,30 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: siteConfig.name,
+    url: siteConfig.siteUrl,
+    email: siteConfig.supportEmail,
+    logo: `${siteConfig.siteUrl}/icon.png`,
+    sameAs: [
+      "https://www.linkedin.com/company/polyhealth",
+    ],
+  };
+
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
+        />
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

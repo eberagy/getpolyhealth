@@ -42,6 +42,10 @@ export default function Testimonials() {
             Built for real clinic workflows,
             <span className="gradient-text"> not generic demos.</span>
           </h2>
+          <p className="mt-4 text-sm text-slate-subtle max-w-2xl mx-auto">
+            Representative feedback from early design conversations and workflow reviews.
+            These are not claims about patient outcomes or guaranteed operational results.
+          </p>
         </div>
 
         {/* Cards */}
