@@ -352,9 +352,10 @@ a:focus-visible {
       rotate(var(--piece-rotate, 0deg));
   }
   52%,
-  86% {
+  70% {
     transform: translate(0, 0);
   }
+  85%,
   100% {
     transform:
       translate(var(--piece-x, 0), var(--piece-y, 0))
@@ -369,10 +370,11 @@ a:focus-visible {
     transform: translate(0, 0) scale(1);
   }
   52%,
-  86% {
+  70% {
     opacity: 0.22;
     transform: translate(18px, -10px) scale(0.9);
   }
+  85%,
   100% {
     opacity: 0.92;
     transform: translate(0, 0) scale(1);
@@ -386,10 +388,11 @@ a:focus-visible {
     transform: translateX(-8px) scale(0.96);
   }
   52%,
-  86% {
+  70% {
     opacity: 1;
     transform: translateX(0) scale(1);
   }
+  85%,
   100% {
     opacity: 0.06;
     transform: translateX(-8px) scale(0.96);
@@ -402,9 +405,10 @@ a:focus-visible {
     opacity: 0;
   }
   56%,
-  88% {
+  72% {
     opacity: 1;
   }
+  84%,
   100% {
     opacity: 0;
   }
@@ -417,9 +421,14 @@ a:focus-visible {
     transform: translateX(0) scale(1);
   }
   52%,
-  100% {
+  70% {
     opacity: 0.18;
     transform: translateX(14px) scale(0.9);
+  }
+  85%,
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
   }
 }
 
@@ -430,10 +439,11 @@ a:focus-visible {
     transform: translateX(-10px) scale(0.9);
   }
   54%,
-  88% {
+  72% {
     opacity: 1;
     transform: translateX(0) scale(1);
   }
+  85%,
   100% {
     opacity: 0.08;
     transform: translateX(-10px) scale(0.9);
@@ -446,9 +456,10 @@ a:focus-visible {
     opacity: 0;
   }
   58%,
-  88% {
+  72% {
     opacity: 1;
   }
+  84%,
   100% {
     opacity: 0;
   }
@@ -461,13 +472,14 @@ a:focus-visible {
     transform: translate(0, 0) rotate(0deg);
   }
   60%,
-  86% {
+  74% {
     opacity: 1;
     transform: translate(16px, -16px) rotate(-8deg);
   }
+  85%,
   100% {
-    opacity: 0.24;
-    transform: translate(24px, -24px) rotate(-10deg);
+    opacity: 0.9;
+    transform: translate(0, 0) rotate(0deg);
   }
 }
 
@@ -477,21 +489,25 @@ a:focus-visible {
     opacity: 0.9;
   }
   60%,
-  86% {
+  74% {
     opacity: 0.34;
   }
+  85%,
   100% {
-    opacity: 0;
+    opacity: 0.9;
   }
 }
 
 @keyframes workflow-flame {
   0%,
+  32%,
+  85%,
   100% {
     opacity: 0.55;
     transform: scaleY(0.9);
   }
-  50% {
+  50%,
+  68% {
     opacity: 1;
     transform: scaleY(1.12);
   }

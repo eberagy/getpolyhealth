@@ -4,14 +4,14 @@ const team = [
   {
     name: "Ragy Ebeid",
     title: "Co-Founder",
-    bio: "Brings healthcare systems context and product thinking shaped by clinical operations, strategy work, and an early commitment to medicine.",
+    bio: "Ex-NASA, current BCG, and Johns Hopkins senior. Accepted to and deferred medical school at 19.",
     linkedin: "https://www.linkedin.com/in/ragy-ebeid-2046a9205/",
     photo: "/team/ragy.png",
   },
   {
     name: "Daniel Cha",
     title: "Co-Founder",
-    bio: "Builds reliable product systems and carefully structured interfaces designed to make real operational workflows feel controlled and usable.",
+    bio: "Ex-TikTok and Amazon. Carnegie Mellon senior building reliable product systems, polished interfaces, and AI workflows for real clinical operations.",
     linkedin: "https://www.linkedin.com/in/danielcha0131/",
     photo: "/team/dan.png",
   },

@@ -60,8 +60,8 @@ export default function Hero() {
         <div className="fade-up max-w-3xl">
           <p className="section-label">Clinic Launch Platform</p>
           <h1 className="display-font max-w-4xl text-5xl leading-[0.96] tracking-[-0.055em] text-white sm:text-6xl md:text-[4.7rem]">
-            Launch a unified telehealth clinic with a{" "}
-            <span className="gradient-text">no-code operating layer.</span>
+            Launch a unified telehealth clinic with{" "}
+            <span className="gradient-text">AI-native integration.</span>
           </h1>
           <p className="section-copy mt-6 max-w-2xl text-lg leading-relaxed sm:text-xl">
             Configure the experience, import existing forms and workflows,
