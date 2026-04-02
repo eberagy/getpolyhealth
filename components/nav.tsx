@@ -1,12 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
-function Logo({ className = "h-12 w-auto" }: { className?: string }) {
+function Logo({ className = "h-10 w-auto" }: { className?: string }) {
   return (
-    <img
+    <Image
       src="/polyhealthLogo.svg"
       alt="PolyHealth logo"
+      width={216}
+      height={64}
       className={`block object-contain ${className}`}
     />
   );
@@ -14,101 +17,91 @@ function Logo({ className = "h-12 w-auto" }: { className?: string }) {
 
 export { Logo };
 
+const links = [
+  { label: "Workflow", href: "#workflow" },
+  { label: "Platform", href: "#platform" },
+  { label: "Proof", href: "#proof" },
+  { label: "Security", href: "#security" },
+  { label: "Team", href: "#team" },
+];
+
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 18);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#0C1220]/85 backdrop-blur-xl border-b border-white/[0.06]"
+          ? "border-b border-white/8 bg-[rgba(5,7,11,0.82)] backdrop-blur-xl"
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
-        {/* Logo */}
-        <a href="#" className="flex items-center group">
-          <Logo className="h-20 w-auto" />
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+        <a href="#" className="flex items-center">
+          <Logo className="h-12 w-auto" />
         </a>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {[
-            { label: "Agents", href: "#agents" },
-            { label: "How It Works", href: "#how-it-works" },
-            { label: "Pricing", href: "#pricing" },
-            { label: "Team", href: "#team" },
-          ].map((item) => (
+        <nav className="hidden items-center gap-8 md:flex">
+          {links.map((item) => (
             <a
               key={item.label}
               href={item.href}
-              className="text-sm text-slate-muted hover:text-white transition-colors duration-200 font-medium"
+              className="text-sm font-medium text-white/64 transition-colors hover:text-white"
             >
               {item.label}
             </a>
           ))}
         </nav>
 
-        {/* CTA */}
         <div className="hidden md:flex">
-          <a href="#demo" className="btn-primary text-sm px-5 py-2.5 text-white">
+          <a href="#demo" className="btn-primary">
             Request Demo
           </a>
         </div>
 
-        {/* Mobile toggle */}
         <button
-          className="md:hidden text-slate-muted hover:text-white transition-colors"
-          onClick={() => setMenuOpen(!menuOpen)}
+          className="text-white/72 transition-colors hover:text-white md:hidden"
+          onClick={() => setMenuOpen((open) => !open)}
+          aria-label="Toggle menu"
         >
           {menuOpen ? (
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M6 18L18 6M6 6l12 12" />
             </svg>
           ) : (
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4 7h16M4 12h16M4 17h16" />
             </svg>
           )}
         </button>
       </div>
 
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div className="md:hidden bg-[#0C1220]/95 backdrop-blur-xl border-b border-white/[0.06] px-6 pb-6 pt-2">
+      {menuOpen ? (
+        <div className="border-b border-white/8 bg-[rgba(5,7,11,0.96)] px-6 pb-6 pt-1 backdrop-blur-xl md:hidden">
           <nav className="flex flex-col gap-4">
-            {[
-              { label: "Agents", href: "#agents" },
-              { label: "How It Works", href: "#how-it-works" },
-              { label: "Pricing", href: "#pricing" },
-              { label: "Team", href: "#team" },
-            ].map((item) => (
+            {links.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                className="text-sm text-slate-muted hover:text-white transition-colors font-medium"
+                className="text-sm font-medium text-white/70 transition-colors hover:text-white"
               >
                 {item.label}
               </a>
             ))}
-            <a
-              href="#demo"
-              onClick={() => setMenuOpen(false)}
-              className="btn-primary text-sm text-center text-white"
-            >
+            <a href="#demo" onClick={() => setMenuOpen(false)} className="btn-primary">
               Request Demo
             </a>
           </nav>
         </div>
-      )}
+      ) : null}
     </header>
   );
 }

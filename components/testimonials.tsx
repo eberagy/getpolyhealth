@@ -1,80 +1,73 @@
-import Image from "next/image";
-
-const testimonials = [
+const proofQuotes = [
   {
     quote:
       "What stood out immediately was how configurable it felt. We could mirror our intake flow, our documentation style, and our patient follow-up steps without rebuilding our operations around the software.",
     name: "Private Primary Care Clinic",
     title: "Early design partner",
-    initials: "PC",
-    color: "rgba(45,212,191,0.15)",
-    text: "#2DD4BF",
   },
   {
     quote:
       "The most compelling part was seeing the whole visit lifecycle connected in one place. Intake, provider workflow, SOAP note generation, and discharge all felt like one coordinated system.",
     name: "Pennsylvania Med Center",
-    title: "Clinical innovation review",
-    initials: "PM",
-    color: "rgba(99,102,241,0.15)",
-    text: "#818CF8",
   },
   {
     quote:
       "For a high-touch specialty practice, the value is in consistency. If the agents can follow our forms, tone, and follow-up rules every time, that is a meaningful operational advantage.",
     name: "Concierge Psychiatry Practice",
-    title: "Workflow evaluation",
-    initials: "CP",
-    color: "rgba(251,191,36,0.12)",
-    text: "#FBB024",
   },
 ];
 
 export default function Testimonials() {
   return (
-    <section className="section-base">
-      <div className="max-w-7xl mx-auto">
-        <div className="max-w-3xl mb-16">
-          <p className="section-label">Design Partners</p>
+    <section id="proof" className="section-base">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-16 max-w-3xl">
+          <p className="section-label">Proof</p>
           <h2 className="section-heading">
-            Built for real clinic workflows,
-            <span className="gradient-text"> not generic demos.</span>
+            A cleaner operating system only matters if it reflects{" "}
+            <span className="gradient-text"> real clinic workflows.</span>
           </h2>
-          <p className="mt-4 max-w-2xl text-sm text-slate-subtle">
-            Representative feedback from early design conversations and workflow reviews.
-            These are not claims about patient outcomes or guaranteed operational results.
+          <p className="section-copy mt-5 max-w-2xl text-lg leading-relaxed">
+            Feedback from design conversations consistently centered on one idea:
+            the product feels configurable, connected, and operationally useful
+            rather than generic.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="fade-up overflow-hidden rounded-[2rem] border border-white/[0.08] bg-white/[0.03] p-3">
-            <Image
-              src="/reviews/xray-review.jpg"
-              alt="Radiology image displayed on a review monitor"
-              width={1200}
-              height={900}
-              className="image-lift aspect-[4/3] w-full rounded-[1.5rem] object-cover"
-            />
+        <div className="grid gap-5 lg:grid-cols-[1.08fr_0.92fr]">
+          <div className="fade-up surface p-8 sm:p-10">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#9ec5ff]">
+              Design Partner Signal
+            </p>
+            <blockquote className="mt-6 max-w-3xl text-2xl leading-relaxed tracking-[-0.03em] text-white sm:text-[2rem]">
+              &ldquo;{proofQuotes[0].quote}&rdquo;
+            </blockquote>
+            <div className="mt-8">
+              <p className="text-sm font-semibold text-white">{proofQuotes[0].name}</p>
+              <p className="mt-1 text-sm text-white/54">{proofQuotes[0].title}</p>
+            </div>
           </div>
 
-          <div className="flex flex-col justify-center gap-5">
-            {testimonials.map((t, index) => (
+          <div className="space-y-4">
+            {proofQuotes.slice(1).map((item, index) => (
               <div
-                key={t.name}
-                className={`fade-up border-t pt-5 ${index === 0 ? "border-white/[0.1] fade-delay-1" : index === 1 ? "border-white/[0.06] fade-delay-2" : "border-white/[0.06] fade-delay-3"}`}
+                key={item.name}
+                className={`fade-up surface-soft p-6 ${index === 0 ? "fade-delay-1" : "fade-delay-2"}`}
               >
-                <p className="text-base leading-relaxed text-slate-text">{t.quote}</p>
-                <div className="mt-4 flex items-center gap-3">
-                  <div
-                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-xs font-bold"
-                    style={{ background: t.color, color: t.text }}
-                  >
-                    {t.initials}
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-white">{t.name}</p>
-                    <p className="text-xs text-slate-muted">{t.title}</p>
-                  </div>
+                <div className="mb-4 flex items-center gap-3">
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[rgba(47,109,246,0.12)] text-xs font-semibold text-[#dce9ff]">
+                    0{index + 2}
+                  </span>
+                  <div className="blueprint-line w-14" />
+                </div>
+                <p className="text-sm leading-7 text-white/72">&ldquo;{item.quote}&rdquo;</p>
+                <div className="mt-5">
+                  <p className="text-sm font-semibold text-white">{item.name}</p>
+                  {item.title ? (
+                    <p className="mt-1 text-xs uppercase tracking-[0.16em] text-white/42">
+                      {item.title}
+                    </p>
+                  ) : null}
                 </div>
               </div>
             ))}

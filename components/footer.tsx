@@ -1,31 +1,36 @@
 import Link from "next/link";
 import { Logo } from "@/components/nav";
+import { siteConfig } from "@/lib/site-config";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/[0.05] px-6 py-12">
-      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-        {/* Logo */}
-        <div className="flex items-center">
+    <footer className="border-t border-white/8 px-6 py-12">
+      <div className="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-end md:justify-between">
+        <div>
           <Logo className="h-12 w-auto" />
+          <p className="mt-4 max-w-sm text-sm leading-7 text-white/54">
+            A no-code operating layer for launching and running a unified
+            telehealth clinic.
+          </p>
         </div>
 
-        {/* Links */}
-        <div className="flex items-center gap-6 text-xs text-slate-muted">
-          <a href="#agents" className="hover:text-white transition-colors">Agents</a>
-          <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
-          <a href="#team" className="hover:text-white transition-colors">Team</a>
-          <a href="#demo" className="hover:text-white transition-colors">Request Demo</a>
-          <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
-          <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
-          <a href="mailto:founder@telemd.app" className="hover:text-white transition-colors">
-            founder@telemd.app
+        <div className="flex flex-col gap-5 text-sm text-white/56 md:items-end">
+          <div className="flex flex-wrap gap-5">
+            <a href="#workflow" className="transition-colors hover:text-white">Workflow</a>
+            <a href="#platform" className="transition-colors hover:text-white">Platform</a>
+            <a href="#proof" className="transition-colors hover:text-white">Proof</a>
+            <a href="#security" className="transition-colors hover:text-white">Security</a>
+            <a href="#demo" className="transition-colors hover:text-white">Request Demo</a>
+            <Link href="/privacy" className="transition-colors hover:text-white">Privacy</Link>
+            <Link href="/terms" className="transition-colors hover:text-white">Terms</Link>
+          </div>
+          <a href={`mailto:${siteConfig.supportEmail}`} className="transition-colors hover:text-white">
+            {siteConfig.supportEmail}
           </a>
+          <p className="text-xs uppercase tracking-[0.16em] text-white/34">
+            © {new Date().getFullYear()} PolyHealth Inc.
+          </p>
         </div>
-
-        <p className="text-xs text-slate-subtle">
-          © {new Date().getFullYear()} PolyHealth Inc. · HIPAA Compliant
-        </p>
       </div>
     </footer>
   );
