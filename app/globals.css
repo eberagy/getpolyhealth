@@ -255,6 +255,7 @@ a:focus-visible {
 .workflow-import-dot {
   fill: rgba(248, 251, 255, 0.9);
   animation: workflow-dot-to-paper var(--workflow-sequence) ease-in-out infinite;
+  transform: translate(0, 0);
 }
 
 .workflow-paper {
@@ -380,8 +381,8 @@ a:focus-visible {
   }
   52%,
   70% {
-    opacity: 0.22;
-    transform: translate(18px, -10px) scale(0.9);
+    opacity: 0.14;
+    transform: translate(var(--dot-x, 0), var(--dot-y, 0)) scale(0.72);
   }
   88%,
   100% {

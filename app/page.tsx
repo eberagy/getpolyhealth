@@ -62,20 +62,30 @@ function ConfigureIcon() {
 }
 
 function ImportIcon() {
+  const targetX = 68;
+  const targetY = 59;
+  const dots = [
+    [20, 42], [28, 58], [22, 74], [36, 36], [42, 54], [34, 80],
+    [50, 40], [56, 62], [46, 86], [60, 48], [66, 74], [54, 92],
+  ];
+
   return (
     <div className="workflow-icon-shell">
       <svg viewBox="0 0 120 120" className="workflow-svg" aria-hidden="true">
-        {[
-          [26, 44], [32, 56], [24, 68], [38, 42], [42, 56], [36, 72],
-          [50, 46], [52, 62], [46, 78], [58, 54], [62, 70], [54, 86],
-        ].map(([cx, cy], index) => (
+        {dots.map(([cx, cy], index) => (
           <circle
             key={index}
             cx={cx}
             cy={cy}
             r="2"
             className="workflow-import-dot"
-            style={{ animationDelay: `${index * 0.12}s` }}
+            style={
+              {
+                animationDelay: `${index * 0.12}s`,
+                "--dot-x": `${targetX - cx}px`,
+                "--dot-y": `${targetY - cy}px`,
+              } as CSSProperties
+            }
           />
         ))}
 
