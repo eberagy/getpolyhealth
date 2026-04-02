@@ -17,9 +17,10 @@ export default function Footer() {
         <div className="flex flex-col gap-5 text-sm text-white/56 md:items-end">
           <div className="flex flex-wrap gap-5">
             <a href="#workflow" className="transition-colors hover:text-white">Workflow</a>
-            <a href="#platform" className="transition-colors hover:text-white">Platform</a>
-            <a href="#proof" className="transition-colors hover:text-white">Proof</a>
+            <a href="#platform" className="transition-colors hover:text-white">Agent Library</a>
+            <a href="#proof" className="transition-colors hover:text-white">Testimonials</a>
             <a href="#security" className="transition-colors hover:text-white">Security</a>
+            <a href="#team" className="transition-colors hover:text-white">Team</a>
             <a href="#demo" className="transition-colors hover:text-white">Request Demo</a>
             <Link href="/privacy" className="transition-colors hover:text-white">Privacy</Link>
             <Link href="/terms" className="transition-colors hover:text-white">Terms</Link>

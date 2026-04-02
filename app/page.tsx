@@ -136,9 +136,30 @@ function LaunchIcon() {
         ))}
 
         <g className="workflow-rocket-trails">
-          <line x1="34" y1="84" x2="48" y2="76" className="workflow-stroke workflow-trail" />
-          <line x1="25" y1="93" x2="41" y2="84" className="workflow-stroke workflow-trail" style={{ animationDelay: "0.18s" }} />
-          <line x1="16" y1="103" x2="34" y2="93" className="workflow-stroke workflow-trail" style={{ animationDelay: "0.34s" }} />
+          <path
+            d="M24 96 C31 91 39 87 48 80"
+            className="workflow-stroke workflow-trail"
+          />
+          <path
+            d="M32 86 C39 83 46 79 53 73"
+            className="workflow-stroke workflow-trail workflow-trail-soft"
+            style={{ animationDelay: "0.16s" }}
+          />
+          <path
+            d="M20 103 C28 98 37 92 46 86"
+            className="workflow-stroke workflow-trail"
+            style={{ animationDelay: "0.32s" }}
+          />
+          {[0, 1, 2, 3].map((particle) => (
+            <circle
+              key={particle}
+              cx={22 + particle * 7}
+              cy={94 - (particle % 2) * 5}
+              r={particle % 2 === 0 ? 1.7 : 1.25}
+              className="workflow-trail-particle"
+              style={{ animationDelay: `${particle * 0.18}s` }}
+            />
+          ))}
         </g>
 
         <g className="workflow-rocket">

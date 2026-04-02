@@ -210,7 +210,7 @@ a:focus-visible {
 }
 
 .workflow-icon-shell {
-  --workflow-sequence: 8s;
+  --workflow-sequence: 10s;
 }
 
 .workflow-svg {
@@ -290,6 +290,15 @@ a:focus-visible {
   animation: workflow-trail-fade var(--workflow-sequence) ease-in-out infinite;
 }
 
+.workflow-trail-soft {
+  stroke: rgba(151, 191, 255, 0.72);
+}
+
+.workflow-trail-particle {
+  fill: rgba(248, 251, 255, 0.82);
+  animation: workflow-trail-particle var(--workflow-sequence) ease-in-out infinite;
+}
+
 .workflow-flame {
   animation: workflow-flame 1.3s ease-in-out infinite;
 }
@@ -355,7 +364,7 @@ a:focus-visible {
   70% {
     transform: translate(0, 0);
   }
-  85%,
+  88%,
   100% {
     transform:
       translate(var(--piece-x, 0), var(--piece-y, 0))
@@ -374,7 +383,7 @@ a:focus-visible {
     opacity: 0.22;
     transform: translate(18px, -10px) scale(0.9);
   }
-  85%,
+  88%,
   100% {
     opacity: 0.92;
     transform: translate(0, 0) scale(1);
@@ -392,7 +401,7 @@ a:focus-visible {
     opacity: 1;
     transform: translateX(0) scale(1);
   }
-  85%,
+  88%,
   100% {
     opacity: 0.06;
     transform: translateX(-8px) scale(0.96);
@@ -408,7 +417,7 @@ a:focus-visible {
   72% {
     opacity: 1;
   }
-  84%,
+  87%,
   100% {
     opacity: 0;
   }
@@ -425,7 +434,7 @@ a:focus-visible {
     opacity: 0.18;
     transform: translateX(14px) scale(0.9);
   }
-  85%,
+  88%,
   100% {
     opacity: 1;
     transform: translateX(0) scale(1);
@@ -443,7 +452,7 @@ a:focus-visible {
     opacity: 1;
     transform: translateX(0) scale(1);
   }
-  85%,
+  88%,
   100% {
     opacity: 0.08;
     transform: translateX(-10px) scale(0.9);
@@ -459,7 +468,7 @@ a:focus-visible {
   72% {
     opacity: 1;
   }
-  84%,
+  87%,
   100% {
     opacity: 0;
   }
@@ -471,12 +480,15 @@ a:focus-visible {
     opacity: 0.9;
     transform: translate(0, 0) rotate(0deg);
   }
-  60%,
-  74% {
-    opacity: 1;
-    transform: translate(16px, -16px) rotate(-8deg);
+  82% {
+    opacity: 0;
+    transform: translate(34px, -40px) rotate(-14deg);
   }
-  85%,
+  84% {
+    opacity: 0;
+    transform: translate(-28px, 30px) rotate(10deg);
+  }
+  88%,
   100% {
     opacity: 0.9;
     transform: translate(0, 0) rotate(0deg);
@@ -486,30 +498,54 @@ a:focus-visible {
 @keyframes workflow-trail-fade {
   0%,
   37% {
-    opacity: 0.9;
+    opacity: 0.82;
   }
-  60%,
-  74% {
-    opacity: 0.34;
+  82% {
+    opacity: 0;
   }
-  85%,
+  84% {
+    opacity: 0;
+  }
+  88%,
   100% {
-    opacity: 0.9;
+    opacity: 0.82;
+  }
+}
+
+@keyframes workflow-trail-particle {
+  0%,
+  37% {
+    opacity: 0.7;
+    transform: translate(0, 0) scale(1);
+  }
+  82%,
+  84% {
+    opacity: 0;
+    transform: translate(-4px, 3px) scale(0.86);
+  }
+  88%,
+  100% {
+    opacity: 0.7;
+    transform: translate(0, 0) scale(1);
   }
 }
 
 @keyframes workflow-flame {
   0%,
-  32%,
-  85%,
-  100% {
+  37% {
     opacity: 0.55;
     transform: scaleY(0.9);
   }
-  50%,
-  68% {
+  60% {
     opacity: 1;
     transform: scaleY(1.12);
+  }
+  82%,
+  84%,
+  88%,
+  100% {
+    opacity: 0;
+    transform: scaleY(0.9);
   }
 }
 
@@ -528,6 +564,7 @@ a:focus-visible {
   .workflow-star,
   .workflow-rocket,
   .workflow-trail,
+  .workflow-trail-particle,
   .workflow-flame,
   .image-lift,
   .btn-primary,

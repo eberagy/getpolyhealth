@@ -39,9 +39,8 @@ function HeroVisual() {
               </span>
               <div>
                 <p className="text-sm font-medium text-white">{row.label}</p>
-                <div className="mt-2 flex gap-2">
-                  <div className="blueprint-line w-12" />
-                  <div className="blueprint-line w-8 opacity-70" />
+                <div className="mt-2">
+                  <div className="blueprint-line w-28 max-w-full" />
                 </div>
               </div>
             </div>

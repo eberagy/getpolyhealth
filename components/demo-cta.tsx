@@ -86,7 +86,6 @@ export default function DemoCTA() {
       <div className="mx-auto max-w-7xl">
         <div className="surface grid gap-8 overflow-hidden p-8 sm:p-10 lg:grid-cols-[1fr_0.95fr]">
           <div className="fade-up">
-            <p className="section-label">Request Demo</p>
             <h2 className="display-font text-5xl leading-[0.96] tracking-[-0.055em] text-white sm:text-6xl">
               Request Demo
             </h2>
