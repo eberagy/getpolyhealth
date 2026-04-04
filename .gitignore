@@ -8,3 +8,4 @@ out/
 *.tsbuildinfo
 next-env.d.ts
 data/demo-requests.json
+lib/polyhealth-color-palette.json
